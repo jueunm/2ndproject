@@ -59,13 +59,20 @@ def load_stock_data(symbols, start_date, end_date):
     
     for i, (name, symbol) in enumerate(symbols.items()):
         try:
-            ticker = yf.Ticker(symbol)
-            hist = ticker.download(start=start_date, end=end_date)
+            # yf.download() 사용 (ticker.download()가 아님)
+            hist = yf.download(symbol, start=start_date, end=end_date)
             
             if not hist.empty:
+                # 기업 정보 가져오기
+                ticker = yf.Ticker(symbol)
+                try:
+                    info = ticker.info
+                except:
+                    info = {}
+                
                 data[name] = {
                     'data': hist,
-                    'info': ticker.info
+                    'info': info
                 }
             else:
                 st.warning(f"{name} ({symbol}) 데이터를 가져올 수 없습니다.")
