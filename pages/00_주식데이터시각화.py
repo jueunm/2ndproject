@@ -61,13 +61,12 @@ st.header(f"'{selected_company_name}' 주가 차트")
 stock_data = load_stock_data(selected_ticker, start_date, end_date)
 
 if stock_data is not None and not stock_data.empty:
-    # 종가 그래프
+    # 종가 그래프 (수정된 부분)
     fig_close = px.line(
         stock_data,
-        x=stock_data.index,
         y="Close",
         title=f"{selected_company_name} 종가 (3년)",
-        labels={"Close": "종가 (USD)", "Date": "날짜"}
+        labels={"Close": "종가", "index": "날짜"}
     )
     fig_close.update_layout(
         xaxis_title="날짜",
@@ -76,13 +75,12 @@ if stock_data is not None and not stock_data.empty:
     )
     st.plotly_chart(fig_close, use_container_width=True)
 
-    # 거래량 그래프
+    # 거래량 그래프 (수정된 부분)
     fig_volume = px.bar(
         stock_data,
-        x=stock_data.index,
         y="Volume",
         title=f"{selected_company_name} 거래량 (3년)",
-        labels={"Volume": "거래량", "Date": "날짜"}
+        labels={"Volume": "거래량", "index": "날짜"}
     )
     fig_volume.update_layout(
         xaxis_title="날짜",
