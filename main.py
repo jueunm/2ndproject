@@ -88,6 +88,7 @@ st.write("---")
 st.sidebar.title("목차")
 page = st.sidebar.radio("원하는 섹션을 선택하세요:", [
     "🎉 포르투갈 여행 시작",
+    "✨ 첫 포르투갈 여행자를 위한 특별 가이드", # New section
     "🗺️ 포르투갈 주요 관광지 지도",
     "🏛️ 리스본 (Lisbon)",
     "🍷 포르투 & 북부 (Porto & North)",
@@ -111,6 +112,130 @@ if page == "🎉 포르투갈 여행 시작":
     </p>
     """, unsafe_allow_html=True)
     st.info("💡 **팁:** 포르투갈은 연중 온화한 기후를 자랑하지만, 방문 시기에 따라 다른 매력을 느낄 수 있습니다. 봄과 가을은 날씨가 쾌적하고 관광객이 비교적 적어 여행하기 가장 좋습니다.")
+
+elif page == "✨ 첫 포르투갈 여행자를 위한 특별 가이드":
+    st.markdown("<h2 class='sub-header'>✨ 첫 포르투갈 여행자를 위한 특별 가이드</h2>", unsafe_allow_html=True)
+    st.markdown("""
+    <p style="font-size:1.2em; text-align:center; background-color:#FFFACD; padding:15px; border-radius:10px; border:2px dashed #FFD700;">
+    <b>🎉 포르투갈에 처음 오신 여러분을 진심으로 환영합니다! 🎉</b><br>
+    이 가이드는 여러분의 첫 포르투갈 여행을 위한 모든 궁금증을 풀어드리고, 잊지 못할 추억을 만드는 데 필요한 핵심 정보를 담고 있습니다.<br>
+    아래 내용을 꼼꼼히 확인하고 즐거운 여행을 준비해 보세요!
+    </p>
+    """, unsafe_allow_html=True)
+
+    st.markdown("<h3 class='section-header'>🇵🇹 왜 포르투갈인가요? (초보 여행자를 위한 매력)</h3>", unsafe_allow_html=True)
+    st.markdown("""
+    <ul>
+        <li><b>🧡 안전하고 친절한 나라:</b> 포르투갈은 유럽에서 손꼽히는 안전한 국가 중 하나입니다. 현지인들은 여행객에게 매우 친절하고 환대가 넘칩니다. 길을 묻거나 도움을 요청할 때 망설이지 마세요!</li>
+        <li><b>💰 합리적인 물가:</b> 서유럽의 다른 인기 여행지에 비해 물가가 저렴한 편이라, 숙박, 식사, 교통 등 전반적인 여행 경비 부담이 적습니다. 여유로운 여행을 즐길 수 있죠.</li>
+        <li><b>🌈 다채로운 경험:</b> 짧은 거리 안에 활기찬 수도 리스본, 역사적인 포르투, 동화 같은 신트라, 황금빛 해변의 알가르베 등 다양한 매력을 가진 도시와 자연이 조화롭게 펼쳐져 있습니다. 모든 취향의 여행객을 만족시킬 수 있을 거예요.</li>
+        <li><b>☀️ 온화한 기후:</b> 연중 온화한 지중해성 기후로 언제 방문해도 쾌적하게 여행할 수 있습니다. 특히 봄과 가을은 '날씨 맛집'으로 불릴 만큼 완벽해요!</li>
+    </ul>
+    """, unsafe_allow_html=True)
+
+    st.markdown("<h3 class='section-header'>✈️ 포르투갈 여행, 이것만은 꼭 알아두세요! (필수 팁)</h3>", unsafe_allow_html=True)
+    st.markdown("""
+    <div class="info-box">
+        <p><b>👟 편한 신발은 필수!</b> 리스본과 포르투 같은 주요 도시는 언덕과 오래된 돌길이 많아 발이 편한 신발은 선택이 아닌 필수입니다. 굽 높은 신발은 잠시 접어두세요!</p>
+        <p><b>🔌 유럽형 2핀 어댑터 준비:</b> 전압은 230V, 50Hz이며, 유럽식 2핀 플러그(Type F)를 사용합니다. 한국에서 미리 준비해 가는 것이 편리해요.</p>
+        <p><b>☀️ 햇볕 조심:</b> 포르투갈은 햇볕이 강한 날이 많습니다. 선크림, 모자, 선글라스를 꼭 챙겨 피부와 눈을 보호해주세요.</p>
+        <p><b>🧥 가벼운 겉옷:</b> 한여름에도 저녁에는 쌀쌀해질 수 있으니, 가벼운 가디건이나 재킷을 챙기면 유용합니다.</p>
+        <p><b>💰 식전 빵 (Couvert) 문화:</b> 식당에서 처음에 빵, 올리브 등이 나오는 경우가 많습니다. 이는 무료가 아니며, 원치 않으면 정중히 "Não, obrigado/a (노, 오브리가두/오브리가다 - 아니요, 괜찮습니다)"라고 말하며 거절할 수 있습니다.</p>
+        <p><b>💶 팁 문화:</b> 의무는 아니지만, 서비스가 만족스러웠다면 전체 금액의 5~10% 정도를 팁으로 남기는 것이 일반적입니다.</p>
+        <p><b>🚨 소매치기 주의:</b> 포르투갈은 안전한 나라지만, 관광객이 많은 번화가나 트램 안에서는 소매치기를 조심해야 합니다. 가방은 항상 몸 앞쪽에 메고 귀중품은 잘 보관하세요.</p>
+        <p><b>💧 수돗물 음용:</b> 포르투갈의 수돗물은 대체로 안전하고 마실 수 있지만, 개인차가 있으니 불안하다면 생수를 구매하는 것이 좋습니다.</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("<h3 class='section-header'>🚎 포르투갈 대중교통 이용 가이드</h3>", unsafe_allow_html=True)
+    st.markdown("""
+    <div class="info-box">
+        <p><b><span style="color:#0047AB;">리스본 (Lisbon)</span>:</b><br>
+        <b>🔹 비바 비아젬 (Viva Viagem) 카드:</b> 리스본 대중교통의 필수품입니다. 지하철역에서 구매(카드 보증금 0.5유로)하고 원하는 금액만큼 충전(Zapping 모드)하여 사용합니다. 지하철, 버스, 트램, 푸니쿨라, 엘리베이터 등 대부분의 대중교통에 사용할 수 있어 매우 편리해요.<br>
+        <b>🔸 28번 트램:</b> 리스본의 상징이자 명물입니다. 주요 관광지를 지나가지만, 항상 사람이 많으니 소매치기에 주의하고, 여유롭게 즐기려면 아침 일찍 타는 것을 추천합니다.</p>
+        <p><b><span style="color:#0047AB;">포르투 (Porto)</span>:</b><br>
+        <b>🔹 안단테 (Andante) 카드:</b> 포르투 대중교통의 핵심 카드입니다. 지하철역에서 구매(카드 보증금 0.6유로)하고 이동할 존(Zone)에 따라 충전하여 사용합니다. 지하철, 버스 등 포르투의 주요 대중교통을 이용할 수 있어요.</p>
+        <p><b><span style="color:#0047AB;">도시 간 이동 (기차/버스)</span>:</b><br>
+        <b>🔹 기차:</b> 리스본-포르투, 리스본-코임브라 등 주요 도시 간 이동에 편리합니다. 포르투갈 철도청(CP - Comboios de Portugal) 웹사이트에서 미리 예약하면 더 저렴하게 구매할 수 있습니다.<br>
+        <b>🔹 버스:</b> 기차가 닿지 않는 지역이나 더 저렴한 옵션을 찾을 때 유용합니다. Rede Expressos와 같은 버스 회사 웹사이트를 확인하세요.</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("<h3 class='section-header'>🗺️ 추천 여행 코스 (예시)</h3>", unsafe_allow_html=True)
+    st.markdown("""
+    <div class="info-box">
+        <h4>✔️ 리스본 집중 3박 4일 코스</h4>
+        <ul>
+            <li><b>1일차:</b> 리스본 도착, 알파마 지구 탐험, 상 조르제 성에서 일몰 감상, 파두 공연 관람.</li>
+            <li><b>2일차:</b> 벨렘 지구 (제로니무스 수도원, 벨렘 탑, 발견 기념비) 투어 후 에그 타르트 맛보기. 바이샤-시아두 지구에서 쇼핑 및 식사.</li>
+            <li><b>3일차:</b> 신트라 당일치기 (페나 궁전, 무어 성, 킨타 다 헤갈레이라).</li>
+            <li><b>4일차:</b> 리스본 자유 시간 (박물관, 쇼핑 등) 및 출국.</li>
+        </ul>
+        <h4>✔️ 포르투 & 도루 밸리 3박 4일 코스</h4>
+        <ul>
+            <li><b>1일차:</b> 포르투 도착, 리베이라 지구 탐험, 동 루이스 1세 다리 건너기, 포트 와인 셀러 투어 및 시음.</li>
+            <li><b>2일차:</b> 렐루 서점 방문, 클레리구스 탑 오르기, 볼량 시장 구경.</li>
+            <li><b>3일차:</b> 도루 밸리 와이너리 투어 및 강 크루즈 (포르투에서 당일치기 또는 1박).</li>
+            <li><b>4일차:</b> 포르투 자유 시간 및 출국.</li>
+        </ul>
+        <p>💡 <b>팁:</b> 이 코스들은 예시이며, 여러분의 관심사와 일정에 맞춰 자유롭게 조정할 수 있습니다!</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("<h3 class='section-header'>🗣️ 간단 포르투갈어 회화 (알아두면 좋아요!)</h3>", unsafe_allow_html=True)
+    st.markdown("""
+    <div class="info-box">
+        <table style="width:100%; border-collapse: collapse;">
+            <tr style="background-color:#ADD8E6;">
+                <th style="padding: 8px; border: 1px solid #ddd; text-align: left;">포르투갈어</th>
+                <th style="padding: 8px; border: 1px solid #ddd; text-align: left;">발음 (근사치)</th>
+                <th style="padding: 8px; border: 1px solid #ddd; text-align: left;">의미</th>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid #ddd;">Olá</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">올라</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">안녕하세요</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid #ddd;">Obrigado / Obrigada</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">오브리가두 (남성) / 오브리가다 (여성)</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">감사합니다</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid #ddd;">Por favor</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">포르 파보르</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">부탁합니다 / 제발</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid #ddd;">Desculpe</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">데스쿨프</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">죄송합니다</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid #ddd;">Sim</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">싱</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">네</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid #ddd;">Não</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">나웅</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">아니오</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid #ddd;">Quanto custa?</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">콴투 쿠스타?</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">얼마예요?</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid #ddd;">Adeus</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">아데우스</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">안녕히 계세요 (헤어질 때)</td>
+            </tr>
+        </table>
+        <p style="margin-top:10px;">현지에서 이 몇 마디만 건네도 포르투갈 사람들이 더 환영해 줄 거예요! 😊</p>
+    </div>
+    """, unsafe_allow_html=True)
+
 
 elif page == "🗺️ 포르투갈 주요 관광지 지도":
     st.markdown("<h2 class='sub-header'>🗺️ 포르투갈 주요 관광지 지도</h2>", unsafe_allow_html=True)
@@ -409,12 +534,8 @@ elif page == "✈️ 여행 팁":
     <div class="info-box">
         <p><b>💰 통화:</b> 유로 (EUR). 카드 사용이 보편적이지만, 작은 상점이나 카페에서는 현금을 준비하는 것이 좋습니다.</p>
         <p><b>🗣️ 언어:</b> 포르투갈어. 관광지에서는 영어가 잘 통하지만, 간단한 포르투갈어 표현을 익혀두면 현지인들과 더 가깝게 소통할 수 있습니다. (예: Olá - 안녕하세요, Obrigado/a - 감사합니다)</p>
-        <p><b>🚌 교통:</b> 주요 도시 간에는 기차나 버스가 잘 연결되어 있습니다. 도시 내에서는 지하철, 트램, 버스를 이용할 수 있습니다. 리스본의 28번 트램은 명물입니다.</p>
-        <p><b>🔌 전압:</b> 230V, 50Hz. 유럽식 2핀 플러그 (Type F)를 사용합니다.</p>
         <p><b>⌚ 시차:</b> 한국보다 8시간 느립니다. (서머타임 적용 시 7시간 느림)</p>
         <p><b>🗓️ 최적의 방문 시기:</b> 봄(4~6월)과 가을(9~10월)은 날씨가 온화하고 관광객이 너무 많지 않아 여행하기 가장 좋습니다. 여름(7~8월)은 날씨가 덥고 관광객이 많지만, 해변 휴양을 즐기기에 좋습니다.</p>
-        <p><b>🚶‍♀️ 언덕과 계단:</b> 리스본과 포르투 같은 도시에는 언덕과 계단이 많으므로 편안한 신발을 준비하는 것이 좋습니다.</p>
-        <p><b>☀️ 햇빛:</b> 햇볕이 강할 수 있으니 선크림, 모자, 선글라스를 챙기세요.</p>
     </div>
     """, unsafe_allow_html=True)
 
