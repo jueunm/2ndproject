@@ -1,108 +1,51 @@
 import streamlit as st
 import yfinance as yf
 import pandas as pd
-import plotly.express as px
-from datetime import datetime, timedelta
+import matplotlib.pyplot as plt
 
-# --- 페이지 설정 ---
-st.set_page_config(
-    page_title="글로벌 Top 10 기업 주가",
-    page_icon="📈",
-    layout="wide"
-)
+st.title("글로벌 시총 Top 10 기업 최근 3년 주가 변화")
 
-# --- 제목 ---
-st.title("글로벌 시가총액 Top 10 기업 주가 변화 (최근 3년)")
-st.write(f"데이터 기준일: {datetime.now().strftime('%Y-%m-%d')}")
-
-# --- Top 10 기업 정보 ---
-TOP_10_COMPANIES = {
-    "NVIDIA": "NVDA",
-    "Microsoft": "MSFT",
+# Top 10 기업 티커 리스트 (필요시 변경 가능)
+tickers = {
     "Apple": "AAPL",
-    "Alphabet (Google)": "GOOGL",
-    "Amazon": "AMZN",
+    "Microsoft": "MSFT",
     "Saudi Aramco": "2222.SR",
-    "Meta Platforms": "META",
-    "TSMC": "TSM",
+    "Alphabet": "GOOGL",
+    "Amazon": "AMZN",
+    "NVIDIA": "NVDA",
     "Berkshire Hathaway": "BRK-B",
-    "Eli Lilly": "LLY"
+    "Tesla": "TSLA",
+    "Meta Platforms": "META",
+    "Taiwan Semiconductor": "TSM"
 }
 
-# --- 데이터 불러오기 ---
-@st.cache_data
-def load_stock_data(ticker, start_date, end_date):
-    """지정된 기간 동안의 주가 데이터를 yfinance를 통해 불러옵니다."""
-    try:
-        data = yf.download(ticker, start=start_date, end=end_date)
-        if data.empty:
-            return None
-        return data
-    except Exception as e:
-        st.error(f"{ticker} 데이터를 불러오는 중 오류가 발생했습니다: {e}")
-        return None
+# 시작, 끝 날짜 설정 (오늘 기준 3년 전부터)
+end_date = pd.Timestamp.today()
+start_date = end_date - pd.DateOffset(years=3)
 
-# --- 날짜 설정 ---
-end_date = datetime.now()
-start_date = end_date - timedelta(days=3*365)
+# 데이터 다운로드
+@st.cache_data(ttl=86400)  # 하루 캐싱
+def download_data(tickers, start, end):
+    data = yf.download(list(tickers.values()), start=start, end=end)["Adj Close"]
+    return data
 
-# --- 사이드바 설정 ---
-st.sidebar.header("기업 선택")
-selected_company_name = st.sidebar.selectbox(
-    "확인하고 싶은 기업을 선택하세요.",
-    list(TOP_10_COMPANIES.keys())
-)
-selected_ticker = TOP_10_COMPANIES[selected_company_name]
+data = download_data(tickers, start_date, end_date)
 
-# --- 메인 화면 ---
-st.header(f"'{selected_company_name}' 주가 차트")
+# 종목 선택 (여러 개 선택 가능)
+selected = st.multiselect("기업 선택", options=list(tickers.keys()), default=list(tickers.keys()))
 
-# 데이터 로딩 및 시각화
-stock_data = load_stock_data(selected_ticker, start_date, end_date)
+if selected:
+    st.subheader("주가 그래프 (조정 종가)")
+    fig, ax = plt.subplots(figsize=(12, 6))
 
-if stock_data is not None and not stock_data.empty:
-    # 종가 그래프 (수정된 부분)
-    fig_close = px.line(
-        stock_data,
-        y="Close",
-        title=f"{selected_company_name} 종가 (3년)",
-        labels={"Close": "종가", "index": "날짜"}
-    )
-    fig_close.update_layout(
-        xaxis_title="날짜",
-        yaxis_title="주가",
-        showlegend=False
-    )
-    st.plotly_chart(fig_close, use_container_width=True)
+    for company in selected:
+        ticker = tickers[company]
+        ax.plot(data.index, data[ticker], label=company)
 
-    # 거래량 그래프 (수정된 부분)
-    fig_volume = px.bar(
-        stock_data,
-        y="Volume",
-        title=f"{selected_company_name} 거래량 (3년)",
-        labels={"Volume": "거래량", "index": "날짜"}
-    )
-    fig_volume.update_layout(
-        xaxis_title="날짜",
-        yaxis_title="거래량",
-        showlegend=False
-    )
-    st.plotly_chart(fig_volume, use_container_width=True)
-
-    # 최근 데이터 테이블
-    st.subheader("최근 주가 데이터")
-    st.dataframe(stock_data.tail().style.format("{:.2f}"))
-
+    ax.set_xlabel("날짜")
+    ax.set_ylabel("주가 (USD 기준, 조정 종가)")
+    ax.legend()
+    ax.grid(True)
+    st.pyplot(fig)
 else:
-    st.warning("선택하신 기업의 주가 데이터를 불러올 수 없습니다.")
-
-# --- 참고 정보 ---
-st.sidebar.markdown("---")
-st.sidebar.info(
-    """
-    **정보:**
-    - 이 앱은 `yfinance` 라이브러리를 사용하여 주가 데이터를 실시간으로 가져옵니다.
-    - 시가총액 순위는 변동될 수 있습니다.
-    - 데이터는 참고용이며, 투자 결정에 대한 책임은 본인에게 있습니다.
-    """
-)
+    st.info("하단에서 최소 1개 이상의 기업을 선택해 주세요.")
