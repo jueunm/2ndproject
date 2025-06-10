@@ -254,25 +254,49 @@ if selected_companies:
         if len(stock_data) > 1:
             st.subheader("🔗 주가 상관관계 분석")
             
-            # 상관관계 매트릭스 생성
-            correlation_data = {}
-            for company, data in stock_data.items():
-                if 'data' in data and not data['data'].empty:
-                    correlation_data[company] = data['data']['Close'].pct_change().dropna()
-            
-            if len(correlation_data) > 1:
-                corr_df = pd.DataFrame(correlation_data).corr()
+            try:
+                # 상관관계 매트릭스 생성
+                correlation_data = {}
+                min_length = float('inf')
                 
-                # 히트맵 생성
-                fig_corr = px.imshow(
-                    corr_df,
-                    text_auto=True,
-                    aspect="auto",
-                    color_continuous_scale="RdBu_r",
-                    title="일일 수익률 상관관계"
-                )
-                fig_corr.update_layout(height=400)
-                st.plotly_chart(fig_corr, use_container_width=True)
+                # 먼저 모든 데이터의 일일 수익률을 계산하고 최소 길이 찾기
+                for company, data in stock_data.items():
+                    if 'data' in data and not data['data'].empty:
+                        daily_returns = data['data']['Close'].pct_change().dropna()
+                        if len(daily_returns) > 10:  # 최소 10일 이상의 데이터가 있어야 함
+                            correlation_data[company] = daily_returns
+                            min_length = min(min_length, len(daily_returns))
+                
+                if len(correlation_data) > 1 and min_length > 10:
+                    # 모든 시리즈를 같은 길이로 맞추기 (뒤에서부터 자르기)
+                    aligned_data = {}
+                    for company, returns in correlation_data.items():
+                        aligned_data[company] = returns.tail(min_length)
+                    
+                    # DataFrame 생성 및 상관관계 계산
+                    corr_df = pd.DataFrame(aligned_data).corr()
+                    
+                    if not corr_df.empty:
+                        # 히트맵 생성
+                        fig_corr = px.imshow(
+                            corr_df,
+                            text_auto=True,
+                            aspect="auto",
+                            color_continuous_scale="RdBu_r",
+                            title="일일 수익률 상관관계",
+                            zmin=-1,
+                            zmax=1
+                        )
+                        fig_corr.update_layout(height=400)
+                        st.plotly_chart(fig_corr, use_container_width=True)
+                    else:
+                        st.warning("상관관계 분석을 위한 충분한 데이터가 없습니다.")
+                else:
+                    st.warning("상관관계 분석을 위해서는 최소 2개 기업의 충분한 데이터가 필요합니다.")
+                    
+            except Exception as e:
+                st.error(f"상관관계 분석 중 오류가 발생했습니다: {str(e)}")
+                st.info("다른 기업들을 선택하거나 다시 시도해보세요.")
         
         # 데이터 출처 및 주의사항
         st.markdown("---")
