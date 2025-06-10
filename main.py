@@ -738,4 +738,3 @@ elif page == "🗓️ 나만의 추천 일정 만들기": # New page for custom 
 
 st.write("---")
 st.markdown("<p style='font-size:1.5em; text-align:center; color:#0047AB;'><b>Boa Viagem! (즐거운 여행 되세요!)</b></p>", unsafe_allow_html=True)
-st.balloons()
