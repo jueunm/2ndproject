@@ -281,7 +281,7 @@ elif page == "🗺️ 포르투갈 주요 관광지 지도":
 
 elif page == "🏛️ 리스본 (Lisbon)":
     st.markdown("<h2 class='sub-header'>🏛️ 리스본 (Lisbon)</h2>", unsafe_allow_html=True)
-    st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Lisbon_as_seen_from_Miradouro_de_Santa_Catarina.jpg/1200px-Lisbon_as_seen_from_Miradouro_de_Santa_Catarina.jpg", caption="테주 강 너머 리스본의 노을")
+    st.image("https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcShjk8SCTmhikUQZQKkLOwLpFgsyFBv6KuHAXyMB4sJC4ZkBxwYVLDO5hoierEGpdTyHL-CkkNGC2GyuiDKv3Kt6x89elqKi_YvSBqw_g", caption="테주 강 너머 리스본의 노을")
     st.markdown("""
     <p>포르투갈의 활기찬 수도 리스본은 일곱 언덕 위에 자리 잡고 있으며, 다채로운 역사와 현대적인 매력이 조화를 이룹니다.
     노란색 트램이 좁은 골목을 오가고, 파두 음악이 밤하늘을 채우는 이 도시는 여러분을 매료시킬 것입니다.</p>
