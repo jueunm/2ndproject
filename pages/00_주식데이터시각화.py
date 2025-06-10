@@ -192,15 +192,18 @@ if selected_companies:
             # 각 기업별 주요 지표 표시
             for company, data in stock_data.items():
                 if 'data' in data and not data['data'].empty:
-                    current_price = data['data']['Close'].iloc[-1]
-                    start_price = data['data']['Close'].iloc[0]
-                    total_return = ((current_price - start_price) / start_price) * 100
-                    
-                    st.metric(
-                        label=f"{company}",
-                        value=f"${current_price:.2f}",
-                        delta=f"{total_return:.1f}%"
-                    )
+                    try:
+                        current_price = float(data['data']['Close'].iloc[-1])
+                        start_price = float(data['data']['Close'].iloc[0])
+                        total_return = ((current_price - start_price) / start_price) * 100
+                        
+                        st.metric(
+                            label=f"{company}",
+                            value=f"${current_price:.2f}",
+                            delta=f"{total_return:.1f}%"
+                        )
+                    except (ValueError, TypeError, IndexError) as e:
+                        st.error(f"{company} 데이터 처리 오류: {str(e)}")
         
         # 상세 분석 섹션
         st.markdown("---")
@@ -210,29 +213,38 @@ if selected_companies:
         returns_data = []
         for company, data in stock_data.items():
             if 'data' in data and not data['data'].empty:
-                prices = data['data']['Close']
-                current_price = prices.iloc[-1]
-                start_price = prices.iloc[0]
-                
-                # 1년 전 가격 (가능한 경우)
-                one_year_ago = datetime.now() - timedelta(days=365)
                 try:
-                    one_year_price = prices[prices.index >= one_year_ago].iloc[0]
-                    one_year_return = ((current_price - one_year_price) / one_year_price) * 100
-                except:
+                    prices = data['data']['Close']
+                    current_price = float(prices.iloc[-1])
+                    start_price = float(prices.iloc[0])
+                    
+                    # 1년 전 가격 (가능한 경우)
+                    one_year_ago = datetime.now() - timedelta(days=365)
                     one_year_return = None
-                
-                # 변동성 계산
-                daily_returns = prices.pct_change().dropna()
-                volatility = daily_returns.std() * np.sqrt(252) * 100  # 연간화된 변동성
-                
-                returns_data.append({
-                    '기업명': company,
-                    '현재가 (USD)': f"${current_price:.2f}",
-                    '3년 수익률 (%)': f"{((current_price - start_price) / start_price) * 100:.1f}%",
-                    '1년 수익률 (%)': f"{one_year_return:.1f}%" if one_year_return else "N/A",
-                    '연간 변동성 (%)': f"{volatility:.1f}%"
-                })
+                    try:
+                        one_year_price_data = prices[prices.index >= one_year_ago]
+                        if not one_year_price_data.empty:
+                            one_year_price = float(one_year_price_data.iloc[0])
+                            one_year_return = ((current_price - one_year_price) / one_year_price) * 100
+                    except:
+                        pass
+                    
+                    # 변동성 계산
+                    daily_returns = prices.pct_change().dropna()
+                    if not daily_returns.empty:
+                        volatility = daily_returns.std() * np.sqrt(252) * 100  # 연간화된 변동성
+                    else:
+                        volatility = 0
+                    
+                    returns_data.append({
+                        '기업명': company,
+                        '현재가 (USD)': f"${current_price:.2f}",
+                        '3년 수익률 (%)': f"{((current_price - start_price) / start_price) * 100:.1f}%",
+                        '1년 수익률 (%)': f"{one_year_return:.1f}%" if one_year_return is not None else "N/A",
+                        '연간 변동성 (%)': f"{volatility:.1f}%"
+                    })
+                except Exception as e:
+                    st.error(f"{company} 수익률 계산 오류: {str(e)}")
         
         if returns_data:
             returns_df = pd.DataFrame(returns_data)
