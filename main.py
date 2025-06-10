@@ -683,7 +683,7 @@ elif page == "✨ 포르투갈의 미식과 문화":
     """, unsafe_allow_html=True)
 
     st.markdown("<h3 class='section-header'>😋 포르투갈 미식</h3>", unsafe_allow_html=True)
-    st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Pasteis_de_nata.jpg/1200px-Pasteis_de_nata.jpg", caption="달콤한 파스텔 드 나타")
+    st.image("https://upload.wikimedia.org/wikipedia/commons/b/b0/Lisbon_%2849219757738%29.jpg", caption="달콤한 파스텔 드 나타")
     st.markdown("""
     <ul>
         <li><b>바칼라우 (Bacalhau):</b> 대구는 포르투갈의 국민 음식입니다. '천 가지 조리법'이 있다고 할 정도로 다양한 방식으로 요리됩니다.</li>
@@ -696,7 +696,7 @@ elif page == "✨ 포르투갈의 미식과 문화":
     """, unsafe_allow_html=True)
 
     st.markdown("<h3 class='section-header'>🎶 포르투갈 문화</h3>", unsafe_allow_html=True)
-    st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Fado_Performance_Lisbon_Portugal.jpg/1200px-Fado_Performance_Lisbon_Portugal.jpg", caption="리스본의 파두 공연")
+    st.image("https://lisboaemfado.pt/wp-content/uploads/2024/12/Lisboa-em-Fado-Performance-by-Mario-and-Mel-1024x768.jpg", caption="리스본의 파두 공연")
     st.markdown("""
     <ul>
         <li><b>파두 (Fado):</b> 포르투갈의 전통 음악으로, 슬픔과 그리움, 운명을 노래합니다. 유네스코 무형문화유산으로 지정되어 있습니다. 리스본의 알파마 지구와 포르투의 작은 레스토랑에서 라이브 공연을 즐길 수 있습니다.</li>
